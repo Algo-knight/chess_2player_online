@@ -38,8 +38,10 @@ io.on("connection", (uniqueSocket) => {
     uniqueSocket.on("disconnect", () => {
         if(players.white===uniqueSocket.id){
             delete players.white;
+            alert('White player disconnected. Game over.');
         }else if(players.black===uniqueSocket.id){
             delete players.black;
+            alert('Black player disconnected. Game over.');
         }
     });
     uniqueSocket.on("move", (move) => {
