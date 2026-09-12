@@ -10,6 +10,7 @@ const server= http.createServer(app);
 const io= socket(server);
 
 const chess= new Chess();
+const initialFen= chess.fen();
 
 let players={};
 let currentPlayer='white';
@@ -38,10 +39,12 @@ io.on("connection", (uniqueSocket) => {
     uniqueSocket.on("disconnect", () => {
         if(players.white===uniqueSocket.id){
             delete players.white;
-            alert('White player disconnected. Game over.');
+            chess.reset();
+            io.emit('Whitegaya');
         }else if(players.black===uniqueSocket.id){
             delete players.black;
-            alert('Black player disconnected. Game over.');
+            chess.reset();
+            io.emit('Blackgaya');
         }
     });
     uniqueSocket.on("move", (move) => {

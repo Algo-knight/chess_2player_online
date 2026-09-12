@@ -94,4 +94,20 @@ socket.on("move", (move) => {
 socket.on("invalidMove", (move) => {
     alert(`Invalid move: ${move.from} to ${move.to}`);
 });
+socket.on("Whitegaya", () => {
+    chess.reset();
+    draggedPiece = null;
+    sourceSquare = null;
+     playerColor = 'b';
+    renderBoard();
+    alert('White player disconnected. Game over.');
+});
+socket.on("Blackgaya", () => {
+    chess.reset();
+    draggedPiece = null;
+    sourceSquare = null;
+     playerColor = 'w';
+    renderBoard();  
+    alert('Black player disconnected. Game over.');
+});  
 renderBoard();
